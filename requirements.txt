@@ -1,1 +1,1 @@
-git+https://github.com/kyokley/BattlePy.git
+git+https://github.com/kyokley/BattlePyEngine.git
