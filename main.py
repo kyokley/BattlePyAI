@@ -1,9 +1,8 @@
 from battlePy.tournament import Tournament
-from battlePy.random_player import RandomPlayer
-from admiral import Admiral
+from random_player import RandomPlayer
 
 def main():
-    tournament = Tournament(RandomPlayer(), Admiral(), 1000)
+    tournament = Tournament(RandomPlayer(), RandomPlayer(), 1000)
     tournament.start()
     tournament.printStats()
 
