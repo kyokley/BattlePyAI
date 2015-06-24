@@ -1,11 +1,6 @@
 from battlePy.player import Player
-from config import (BOARD_WIDTH,
-                    BOARD_HEIGHT,
-                    DEFAULT_SHIPS)
 from battlePy.ship import (UP,
                            RIGHT,
-                           LEFT,
-                           DOWN,
                            SHIP_ORIENTATIONS,
                            VECTOR_DICT,
                            )
@@ -15,19 +10,6 @@ VERSION = 'v0.1'
 (SEARCH,
  DESTROY,
  RANDOM) = OFFENSIVE_MODES = range(3)
-
-def intToPoint(num):
-    x = num % BOARD_WIDTH
-    y = num / BOARD_WIDTH
-    return x, y
-
-def pointToInt(point):
-    total = point[0] + BOARD_WIDTH * point[1]
-    return total
-
-def isValidPoint(point):
-    return (0 <= point[0] < BOARD_WIDTH and
-            0 <= point[1] < BOARD_HEIGHT)
 
 def findMinMaxPoint(points):
     minPoint = None
@@ -71,18 +53,21 @@ def getDistance(x, y):
 class Admiral(Player):
     def initPlayer(self):
         self.name = 'Admiral %s' % VERSION
-        self.shipSizes = dict(((x[0], x[1]) for x in DEFAULT_SHIPS))
 
     def newGame(self):
+        self.boardWidth = self.currentGame.boardWidth
+        self.boardHeight = self.currentGame.boardHeight
+        self.shipSizes = dict(((x[0], x[1]) for x in self.currentGame.shipSpecs))
+
         self.shots = set()
-        self.foundShips = dict(((x[0], []) for x in DEFAULT_SHIPS))
+        self.foundShips = dict(((x[0], []) for x in self.currentGame.shipSpecs))
         self.searchMat = []
-        self.killMats = dict(((x[0], set()) for x in DEFAULT_SHIPS))
+        self.killMats = dict(((x[0], set()) for x in self.currentGame.shipSpecs))
 
         self.offense = SEARCH
 
-        for i in xrange(BOARD_HEIGHT):
-            for j in xrange(i % 2, BOARD_WIDTH, 2):
+        for i in xrange(self.boardHeight):
+            for j in xrange(i % 2, self.boardWidth, 2):
                 self.searchMat.append((i, j))
 
     def shotHit(self, shot, shipName):
@@ -100,22 +85,22 @@ class Admiral(Player):
             for i in xrange(1, self.shipSizes[shipName]):
                 possibleShot = (minPoint[0] - i * shipLine[0],
                                 minPoint[1] - i * shipLine[1])
-                if isValidPoint(possibleShot):
+                if self.isValidPoint(possibleShot):
                     possibleLocations.append(possibleShot)
 
                 possibleShot = (minPoint[0] + i * shipLine[0],
                                 minPoint[1] + i * shipLine[1])
-                if isValidPoint(possibleShot):
+                if self.isValidPoint(possibleShot):
                     possibleLocations.append(possibleShot)
 
                 possibleShot = (maxPoint[0] + i * shipLine[0],
                                 maxPoint[1] + i * shipLine[1])
-                if isValidPoint(possibleShot):
+                if self.isValidPoint(possibleShot):
                     possibleLocations.append(possibleShot)
 
                 possibleShot = (maxPoint[0] - i * shipLine[0],
                                 maxPoint[1] - i * shipLine[1])
-                if isValidPoint(possibleShot):
+                if self.isValidPoint(possibleShot):
                     possibleLocations.append(possibleShot)
 
             self.killMats[shipName] = set(possibleLocations)
@@ -126,7 +111,7 @@ class Admiral(Player):
                 vector = (VECTOR_DICT[direction][0],
                           VECTOR_DICT[direction][1])
                 possibleShot = (shot[0] + vector[0], shot[1] + vector[1])
-                if isValidPoint(possibleShot):
+                if self.isValidPoint(possibleShot):
                     self.killMats[shipName].add(possibleShot)
 
         if self.killMats[shipName]:
@@ -148,23 +133,23 @@ class Admiral(Player):
             while not isValid:
                 orientation = random.choice([UP, RIGHT])
                 if orientation == UP:
-                    location = (random.randint(0, BOARD_WIDTH - 1),
-                                random.randint(0, BOARD_HEIGHT - 1 - ship.size))
+                    location = (random.randint(0, self.boardWidth - 1),
+                                random.randint(0, self.boardHeight - 1 - ship.size))
                 else:
-                    location = (random.randint(0, BOARD_WIDTH - 1 - ship.size),
-                                random.randint(0, BOARD_HEIGHT - 1))
+                    location = (random.randint(0, self.boardWidth - 1 - ship.size),
+                                random.randint(0, self.boardHeight - 1))
                 ship.placeShip(location, orientation)
 
                 if self.isShipPlacedLegally(ship):
                     isValid = True
 
     def getRandomShot(self):
-        shot = (random.randint(0, BOARD_WIDTH - 1),
-                random.randint(0, BOARD_HEIGHT - 1))
+        shot = (random.randint(0, self.boardWidth - 1),
+                random.randint(0, self.boardHeight - 1))
 
         while shot in self.shots:
-            shot = (random.randint(0, BOARD_WIDTH - 1),
-                    random.randint(0, BOARD_HEIGHT - 1))
+            shot = (random.randint(0, self.boardWidth - 1),
+                    random.randint(0, self.boardHeight - 1))
 
         return shot
 
@@ -191,3 +176,16 @@ class Admiral(Player):
                     assert False
         self.shots.add(shot)
         return shot
+
+    def intToPoint(self, num):
+        x = num % self.boardWidth
+        y = num / self.boardWidth
+        return x, y
+
+    def pointToInt(self, point):
+        total = point[0] + self.boardWidth * point[1]
+        return total
+
+    def isValidPoint(self, point):
+        return (0 <= point[0] < self.boardWidth and
+                0 <= point[1] < self.boardHeight)
