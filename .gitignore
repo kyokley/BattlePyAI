@@ -1,1 +1,6 @@
 *.pyc
+*
+!requirements.txt
+!main.py
+!.gitignore
+!random_player.py
