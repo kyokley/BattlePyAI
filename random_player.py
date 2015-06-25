@@ -3,9 +3,6 @@ from battlePy.ship import UP, RIGHT
 import random
 
 class RandomPlayer(Player):
-    def initPlayer(self):
-        self.name = 'RandomPlayer'
-
     def placeShips(self):
         for ship in self.ships:
             isValid = False
