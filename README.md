@@ -25,16 +25,22 @@ Every game can be thought of as consisting of 4 phases. Not every phase is requi
 Before the actual game begins, the `newGame` method is called. This method may be useful in initializing any variables that need to be set on a per game basis.
 
 ```python
-def newGame(self):
+class SuperAwesomeBattlePyAI(Player):
     ...
+
+    def newGame(self):
+        ...
 ```
 
 ### Phase 2: Ship Placement
 The `placeShips` method of each AI is called during this phase. Each player AI has access to a list containing all of their ships in the `ships` attribute.
 
 ```python
-def placeShips(self):
+class SuperAwesomeBattlePyAI(Player):
     ...
+
+    def placeShips(self):
+        ...
 ```
 
 Each ship has a `placeShip` method that can be used to put the ship on the board. The `placeShip` method expects a point representing the first ship location and an orientation representing the direction of the ship (You should use the ship orientation enumeration from battlePy.ship).
@@ -51,8 +57,11 @@ If any ships are placed illegally, the game engine will call the player's `place
 During this phase, players take turns firing shots at their opponent's board. By implementing the `fireShot` method, each player is able to select a cell to fire at. The method is expected to return a 2-tuple representing a horizontal and vertical component. i.e. (x, y).
 
 ```python
-def fireShot(self):
+class SuperAwesomeBattlePyAI(Player):
     ...
+
+    def fireShot(self):
+        ...
 ```
 
 The game engine will allow invalid shots (shots off the board) as well as shots to previously fired upon locations. Shot management is left to the AI.
@@ -60,34 +69,46 @@ The game engine will allow invalid shots (shots off the board) as well as shots 
 After firing a shot, various methods are called on both the offensive and defensive players to allow collection of data. For the offensive player, the `shotHit` and `shotMissed` methods are called to reflect whether a ship has been hit or not. The function signatures are as follows:
 
 ```python
-def shotHit(self, shot, shipName):
+class SuperAwesomeBattlePyAI(Player):
     ...
+
+    def shotHit(self, shot, shipName):
+        ...
     
-def shotMissed(self, shot):
-    ...
+    def shotMissed(self, shot):
+        ...
 ```
 
 For the defensive player, the `opponentShot` method is called.
 
 ```python
-def opponentShot(self, shot):
+class SuperAwesomeBattlePyAI(Player):
     ...
+
+    def opponentShot(self, shot):
+        ...
 ```
 
 When all of a ship's locations have been hit, the ship is sunk. This calls the `shipSunk` method on the offensive player to notify it of which ship has been sunk.
 
 ```python
-def shipSunk(self, shipName):
+class SuperAwesomeBattlePyAI(Player):
     ...
+
+    def shipSunk(self, shipName):
+        ...
 ```
 
 ### Phase 4: End Game
 The game is over when all of a player's ships have been sunk. This calls the `gameWon` and `gameLost` methods on the winning and losing players, respectively.
 
 ```python
-def gameWon(self):
+class SuperAwesomeBattlePyAI(Player):
     ...
 
-def gameLost(self):
-    ...
+    def gameWon(self):
+        ...
+
+    def gameLost(self):
+        ...
 ```
