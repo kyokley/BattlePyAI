@@ -17,6 +17,7 @@ This repo provides a starting point for developing an AI strategy to run on the 
 4. At this point, you should be able to run main. This will run 1000 games of the RandomPlayer versus itself.
 
         python main.py
+
 ## Creating a new AI
 Every game is separated into two phases. The first phase is where both players place ships on the board. The second phase is the offensive phase where players take turns shooting at their opponent's board.
 
@@ -25,6 +26,11 @@ Ships are placed during the first phase of each game. The placeShips method of e
 
 Each ship has a `placeShip` method that can be used to put the ship on the board. The `placeShip` method expects a point representing the first ship location and an orientation representing the direction of the ship (You should use the ship orientation enumeration from battlePy.ship).
 
+```python
+def placeShips(self):
+    pass
+```
+
 If any ships are placed illegally, the game engine will call the player's `placeShip` method again. Each player has 100 attempts to place all of their ships legally. Failure to do so will result in a forfeit.
 
 ### Phase 2: Shots Fired
@@ -32,4 +38,26 @@ During this phase, players take turns firing shots at their opponent's board. By
 
 The game engine will allow invalid shots (shots off the board) as well as shots to previously fired upon locations. Shot management is left to the AI.
 
-After firing a shot...
+After firing a shot, various methods are called on both the offensive and defensive players to allow collection of data. For the offensive player, the `shotHit` and `shotMissed` methods are called to reflect whether a ship has been hit or not. The function signatures are as follows:
+
+```python
+def shotHit(self, shot, shipName):
+    pass
+    
+def shotMissed(self, shot):
+    pass
+```
+
+For the defensive player, the `opponentShot` method is called.
+
+```python
+def opponentShot(self, shot):
+    pass
+```
+
+When all of a ship's locations have been hit, the ship is sunk. This calls the `shipSunk` method on the offensive player to notify it of which ship has been sunk.
+
+```python
+def shipSunk(self, shipName):
+    ...
+```
