@@ -47,6 +47,8 @@ Each ship has a `placeShip` method that can be used to put the ship on the board
 
 ```python
 class Ship(object):
+    ...
+
     def placeShip(self, location, orientation):
         ...
 ```
@@ -112,3 +114,6 @@ class SuperAwesomeBattlePyAI(Player):
     def gameLost(self):
         ...
 ```
+
+### Other Stuff
+In addition to the main rules of the game, there are other conditions that may cause your AI to lose if triggered. Any unhandled exceptions will cause the offending AI to lose.
