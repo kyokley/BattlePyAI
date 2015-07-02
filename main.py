@@ -1,10 +1,10 @@
-from battlePy.tournament import Tournament
+from battlePy.series import Series
 from random_player import RandomPlayer
 
 def main():
-    tournament = Tournament(RandomPlayer(), RandomPlayer(), 1000)
-    tournament.start()
-    tournament.printStats()
+    series = Series(RandomPlayer(), RandomPlayer(), 1000)
+    series.start()
+    series.printStats()
 
 if __name__ == '__main__':
     main()
