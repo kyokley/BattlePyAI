@@ -1,9 +1,10 @@
 from battlePy.series import Series
-from random_player import RandomPlayer
+from samples.random_player import RandomPlayer
+from samples.rando_shotdrissian import RandoShotdrissian
 
 def main():
     series = Series(RandomPlayer(),
-                    RandomPlayer(),
+                    RandoShotdrissian(),
                     numberOfGames=1000,
                     showVisualization=False,
                     visualizationInterval=.01)
