@@ -13,7 +13,7 @@ This repo provides a starting point for developing an AI strategy to run on the 
         source battlepy/bin/activate
 3. Install the necessary requirements
 
-        pip install -r requirements.txt
+        pip install --upgrade -r requirements.txt
 4. At this point, you should be able to run main. This will run 1000 games of the RandomPlayer versus itself.
 
         python main.py
