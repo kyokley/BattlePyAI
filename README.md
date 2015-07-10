@@ -118,7 +118,9 @@ class SuperAwesomeBattlePyAI(Player):
 
 ### Other Rules
 In addition to the main rules of the game, there are other conditions that may cause your AI to lose if triggered. 
+
 1. Any unhandled exceptions will cause the offending AI to lose.
+
 2. Each player has 1 second of computation time per game. Being stuck in a method longer than this will result in a GameClockViolationException being raised.
 
 ### Testing
