@@ -17,6 +17,7 @@ This repo provides a starting point for developing an AI strategy to run on the 
 4. At this point, you should be able to run main. This will run 1000 games of the RandomPlayer versus itself.
 
         python main.py
+*NOTE:* The code for the game engine may change up until the day of the tournament. Therefore, it is a good idea to git pull this repo and re-run step 3 often to ensure that you are running against the latest code.
 
 ## Creating a new AI
 Every game can be thought of as consisting of 4 phases. Not every phase is required to be implemented but methods are provided to allow flexibility in implementing various AI strategies.
@@ -115,5 +116,10 @@ class SuperAwesomeBattlePyAI(Player):
         ...
 ```
 
-### Other Stuff
-In addition to the main rules of the game, there are other conditions that may cause your AI to lose if triggered. Any unhandled exceptions will cause the offending AI to lose.
+### Other Rules
+In addition to the main rules of the game, there are other conditions that may cause your AI to lose if triggered. 
+1. Any unhandled exceptions will cause the offending AI to lose.
+2. Each player has 1 second of computation time per game. Being stuck in a method longer than this will result in a GameClockViolationException being raised.
+
+### Testing
+In order to facilitate testing, there is a debug mode. In debug mode, the game clock is disabled and unhandled exceptions will cause execution to halt. Debug mode is turned on by setting the optional keyword argument debug to True in the Series or Game classes.
