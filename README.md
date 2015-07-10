@@ -17,7 +17,8 @@ This repo provides a starting point for developing an AI strategy to run on the 
 4. At this point, you should be able to run main. This will run 1000 games of the RandomPlayer versus itself.
 
         python main.py
-*NOTE:* The code for the game engine may change up until the day of the tournament. Therefore, it is a good idea to git pull this repo and re-run step 3 often to ensure that you are running against the latest code.
+
+**NOTE:** The code for the game engine may change up until the day of the tournament. Therefore, it is a good idea to git pull this repo and re-run step 3 often to ensure that you are running against the latest code.
 
 ## Creating a new AI
 Every game can be thought of as consisting of 4 phases. Not every phase is required to be implemented but methods are provided to allow flexibility in implementing various AI strategies.
