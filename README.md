@@ -124,5 +124,7 @@ In addition to the main rules of the game, there are other conditions that may c
 
 2. Each player has 1 second of computation time per game. Being stuck in a method longer than this will result in a GameClockViolationException being raised.
 
+3. Finally, and most importantly, do not do anything that violates the spirit of the competition. It's easy enough to inspect your opponent's AI instance for the location of all of its ships. But where's the fun in that?
+
 ### Testing
 In order to facilitate testing, there is a debug mode. In debug mode, the game clock is disabled and unhandled exceptions will cause execution to halt. Debug mode is turned on by setting the optional keyword argument debug to True in the Series or Game classes.
