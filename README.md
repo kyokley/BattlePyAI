@@ -297,11 +297,8 @@ In addition to the main rules of the game, there are other conditions that may c
 
 ### Testing
 
-'main.py' is the testing program. Currently to utilize your agent code, you will need to edit the program and import your agent file and pass it to the Series (see main.py for the functioning example):
+'main.py' is the testing program. Currently to utilize your agent code, you will need to edit the program and import your agent file and pass it to the Series (see main.py for the functioning example).
 
-```
-from newagent import SuperAwesomeBattlePyAI
-```
 
 Then run your series to test:
 
