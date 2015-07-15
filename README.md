@@ -56,7 +56,6 @@ Agent = SinkTheBizMarkee
 Your class must be assigned to the name Agent in this file for the engine to discover it. 
 You may choose to name your player class anything you like as long as you also provide a reference to your actual agent code via the name 'Agent'. 
 
-
 ### A complete Battlepy Agent
 
 But this code isnt enough to play - in fact it will fail since it does not implement the placeShips method properly, and has no implementations for the other methods.
