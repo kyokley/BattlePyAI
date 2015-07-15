@@ -291,7 +291,7 @@ Here is an example usage that tests a new agent file (newagent.py) over one of t
 
 
 ```
-python main.py --p1 me --p2 samples.random_player --debug --vis
+python main.py --p1 newagent --p2 samples.random_player --vis
 ```
 
 In order to facilitate testing, there is a debug mode. In debug mode, the game clock is disabled and unhandled exceptions will cause execution to halt. Debug mode is turned on by setting the optional --debug argument on the command line when running 'main' or 'tournament' programs.
