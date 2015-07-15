@@ -1,13 +1,6 @@
 import argparse
-from importlib import import_module
 from battlePy.series import Series
-
-
-# TODO: move me to the engine?
-def loadPlayer(module_path):
-    """Import the function "planner" from the specific planner module file and return it."""
-    agentModule = import_module(module_path)
-    return agentModule.Agent()
+from battlePy.player import loadPlayerModule
 
 
 def main():
@@ -27,11 +20,11 @@ def main():
                         help="Enable debug behavior.")
     args = parser.parse_args()
 
-    p1 = loadPlayer(args.p1)
-    p2 = loadPlayer(args.p2)
+    p1 = loadPlayerModule(args.p1)
+    p2 = loadPlayerModule(args.p2)
 
-    series = Series(p1,
-                    p2,
+    series = Series(p1(),
+                    p2(),
                     numberOfGames=args.games,
                     showVisualization=args.vis,
                     debug=args.debug,

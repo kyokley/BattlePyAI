@@ -284,4 +284,14 @@ In addition to the main rules of the game, there are other conditions that may c
 4. Finally, and most importantly, do not do anything that violates the spirit of the competition. It's easy enough to inspect your opponent's AI instance for the location of all of its ships. But where's the fun in that?
 
 ### Testing
+
+'main.py' is the testing program - it will let you specify the agents that should play. 
+
+Here is an example usage that tests a new agent file (newagent.py) over one of the provided samples (samples/random_player.py):
+
+
+```
+python main.py --p1 me --p2 samples.random_player --debug --vis
+```
+
 In order to facilitate testing, there is a debug mode. In debug mode, the game clock is disabled and unhandled exceptions will cause execution to halt. Debug mode is turned on by setting the optional --debug argument on the command line when running 'main' or 'tournament' programs.
