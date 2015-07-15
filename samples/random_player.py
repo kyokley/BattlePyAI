@@ -22,3 +22,5 @@ class RandomPlayer(Player):
     def fireShot(self):
         return (random.randint(0, self.currentGame.boardWidth - 1),
                 random.randint(0, self.currentGame.boardHeight - 1))
+
+Agent = RandomPlayer
