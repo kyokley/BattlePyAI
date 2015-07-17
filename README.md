@@ -33,7 +33,7 @@ The game is won when all of a player's ships have been sunk.
         pip install --upgrade -r requirements.txt
 4. At this point, you should be able to run battle.py (the testing app). This will run 1000 games of the two sample agents against each other. 
 
-        python battlepy.py --vis
+        python battle.py --vis
 
 
 **NOTE:** The code for the game engine may change up until the day of the tournament. Therefore, it is a good idea to git pull this repo and re-run step 3 often to ensure that you are running against the latest code.
@@ -317,7 +317,7 @@ optional arguments:
   -h, --help       show this help message and exit
   --p1 <dir.file>  module name of agent for player 1 (eg, samples.random). See
                    code for passing args.
-  --p2 <dir.file>  module name w agent code for player 1 (eg, samples.random)
+  --p2 <dir.file>  module name of agent for player 2 (eg, samples.random)
   --vis            Turn on game visualization(slow)
   --games N        Number of games to play.
   --debug          Enable debug behavior.
