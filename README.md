@@ -31,9 +31,10 @@ The game is won when all of a player's ships have been sunk.
 3. Install the necessary requirements
 
         pip install --upgrade -r requirements.txt
-4. At this point, you should be able to run main. This will run 1000 games of the RandomPlayer versus itself.
+4. At this point, you should be able to run battle.py (the testing app). This will run 1000 games of the two sample agents against each other. 
 
-        python main.py
+        python battlepy.py --vis
+
 
 **NOTE:** The code for the game engine may change up until the day of the tournament. Therefore, it is a good idea to git pull this repo and re-run step 3 often to ensure that you are running against the latest code.
 
@@ -50,8 +51,11 @@ from battlePy.player import Player
 class SinkTheBizMarkee(Player):
     pass
 
+Agent = SinkTheBizMarkee
 ```
 
+Your class must be assigned to the name Agent in this file for the engine to discover it. 
+You may choose to name your player class anything you like as long as you also provide a reference to your actual agent code via the name 'Agent'. 
 
 ### A complete Battlepy Agent
 
@@ -115,6 +119,7 @@ class SinkTheBizMarkee(Player):
         pass
 
 
+Agent = SinkTheBizMarkee
 ```
 
 
@@ -297,14 +302,74 @@ In addition to the main rules of the game, there are other conditions that may c
 
 ### Testing
 
-'main.py' is the testing program. Currently to utilize your agent code, you will need to edit the program and import your agent file and pass it to the Series (see main.py for the functioning example).
+'battle.py' is the testing program - it will let you specify the agents that should play. 
 
-
-Then run your series to test:
 
 ```
-python main.py
+python battle.py --help
+
+usage: battle.py [-h] [--p1 <dir.file>] [--p2 <dir.file>] [--vis] [--games N]
+                 [--debug]
+
+BattlePyAI
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --p1 <dir.file>  module name of agent for player 1 (eg, samples.random). See
+                   code for passing args.
+  --p2 <dir.file>  module name w agent code for player 1 (eg, samples.random)
+  --vis            Turn on game visualization(slow)
+  --games N        Number of games to play.
+  --debug          Enable debug behavior.
+
 ```
 
-In order to facilitate testing, there is a debug mode. In debug mode, the game clock is disabled and unhandled exceptions will cause execution to halt. 
-Debug mode is turned on by setting the optional 'debug' argument when initiliazing the Series or Tournament objects.  
+
+**Running a test**
+
+Here is an example usage that tests a new agent file in the working directory (newagent.py) over one of the provided samples (samples/random_player.py):
+
+```
+python battle.py --p1 newagent --p2 samples.random_player --vis
+```
+
+
+**Debugging**
+
+In order to facilitate testing, there is a debug mode. In debug mode, the game clock is disabled and unhandled exceptions will cause execution to halt.
+Debug mode is turned on by setting the optional --debug argument on the command line when running the 'battle' or 'tournament' programs.
+
+
+**Passing parameters to your agent**
+
+For testing and experimentation, you may want to give your agent code the ability to change its behavior based on parameters specified for each battle.
+
+You can do this by adding any text-based data you want after the name of the agent module on the command-line, like this:
+
+```
+python battle.py --p1 "newagent random" --p2 samples.random_player --vis
+```
+
+When battle.py runs, it will take everything before the first space in the string as the name of the module (newagent), and everything after the first space will be passed to the agent on startup as the kw argument named "argstring".
+
+Once passed to the agent as a string, your code can do anything it wants with that data.
+
+
+To accomplish this, you should code your agent to look for the argstring argument and act on it in the initPlayer call:
+
+
+```python
+class SuperAwesomeBattlePyAI(Player):
+    ...
+
+    def initPlayer(self, *args, **kwargs):
+        if 'argstring' in kwargs:
+            self.personality = kwargs['argstring']
+
+    ...
+
+    def fireShot(self):
+        if self.personality == 'random':
+            ...
+
+```

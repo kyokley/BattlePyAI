@@ -36,3 +36,5 @@ class RandoShotdrissian(Player):
                     random.randint(0, BOARD_HEIGHT - 1))
         self.shots.add(shot)
         return shot
+
+Agent = RandoShotdrissian
