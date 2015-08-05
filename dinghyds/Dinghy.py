@@ -107,3 +107,5 @@ class Dinghy(Player):
         pass
     def gameLost(self):
         pass
+
+Agent = Dinghy

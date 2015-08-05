@@ -248,3 +248,5 @@ class OldAgeAndTreachery(Player):
         self.misses.add(shot)
         self.last_shot_status = False
         self.hit_history[shot] -= 1
+
+Agent = OldAgeAndTreachery
