@@ -13,6 +13,7 @@ def main():
             "dinghyds.Dinghy",
             "downinflamesjb.downinflames",
             "oaatss.oaatss",
+            "buccaneerpg.buccaneer",
             ]
 
     parser = argparse.ArgumentParser(description="BattlePyAI Tournament")

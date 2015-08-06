@@ -108,3 +108,5 @@ class Buccaneer(Player):
     
     def getStats(self):
         return self.stats        
+
+Agent = Buccaneer
