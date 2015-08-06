@@ -4,7 +4,6 @@ from battlePy.player import loadPlayerModule
 
 def main():
     demo_roster = [
-            "samples.random_player",
             "samples.rando_shotdrissian",
             "admiralky.admiral3",
             "admiralcatbotdg.admiralcatbotdg",

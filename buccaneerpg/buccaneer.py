@@ -103,7 +103,6 @@ class Buccaneer(Player):
     
     def gameLost(self):
         self.stats.append(self.shotsFired)
-        time.sleep(2)
         #import pdb; pdb.set_trace()
     
     def getStats(self):
