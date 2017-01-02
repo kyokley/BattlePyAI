@@ -5,15 +5,7 @@ from battlePy.player import loadPlayerModule
 def main():
     demo_roster = [
             "samples.rando_shotdrissian",
-            "admiralky.admiral3",
-            "admiralcatbotdg.admiralcatbotdg",
-            "mmalinowskimm.mmalinowskimm",
-            "commandermb.commander_bernum",
-            "dinghyds.Dinghy",
-            "downinflamesjb.downinflames",
-            "oaatss.oaatss",
-            "buccaneerpg.buccaneer",
-            "nelsonis.nelson",
+            "samples.random_player",
             ]
 
     parser = argparse.ArgumentParser(description="BattlePyAI Tournament")
