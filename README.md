@@ -2,6 +2,8 @@
 
 This repo provides a starting point for developing an AI strategy to run on the BattlePy engine.
 
+![Screenshot](/../screenshots/screenshots/output.gif?raw=true)
+
 In BattlePy, Artificial Intelligence agents are pitted against each other in a computerized form of the classic board game Battleship.
 
 ## Battleship Overview
@@ -31,7 +33,7 @@ The game is won when all of a player's ships have been sunk.
 3. Install the necessary requirements
 
         pip install --upgrade -r requirements.txt
-4. At this point, you should be able to run battle.py (the testing app). This will run 1000 games of the two sample agents against each other. 
+4. At this point, you should be able to run battle.py (the testing app). This will run 1000 games of the two sample agents against each other.
 
         python battle.py --vis
 
@@ -54,8 +56,8 @@ class SinkTheBizMarkee(Player):
 Agent = SinkTheBizMarkee
 ```
 
-Your class must be assigned to the name Agent in this file for the engine to discover it. 
-You may choose to name your player class anything you like as long as you also provide a reference to your actual agent code via the name 'Agent'. 
+Your class must be assigned to the name Agent in this file for the engine to discover it.
+You may choose to name your player class anything you like as long as you also provide a reference to your actual agent code via the name 'Agent'.
 
 ### A complete Battlepy Agent
 
@@ -92,7 +94,7 @@ class SinkTheBizMarkee(Player):
 
     def fireShot(self):
         """Called once per turn, you must fire"""
-        return (0,0) 
+        return (0,0)
 
     def shotHit(self, shot, shipName):
         """Called when your shot has hit"""
@@ -127,7 +129,7 @@ Agent = SinkTheBizMarkee
 
 ### Game information
 
-The game is played on a 10x10 grid: (0,0) to (9, 9). 
+The game is played on a 10x10 grid: (0,0) to (9, 9).
 The bottom-left corner of the grid is (0,0):
 ```
       .......... (9,9)
@@ -247,7 +249,7 @@ class SuperAwesomeBattlePyAI(Player):
 
     def shotHit(self, shot, shipName):
         ...
-    
+
     def shotMissed(self, shot):
         ...
 ```
@@ -287,12 +289,12 @@ class SuperAwesomeBattlePyAI(Player):
 ```
 
 ### Other Rules
-In addition to the main rules of the game, there are other conditions that may cause your AI to lose if triggered. 
+In addition to the main rules of the game, there are other conditions that may cause your AI to lose if triggered.
 
 1. Use any modules available in the python 2.7 standard library, with these exceptions:
  * threading, multiprocessing...
  * pdb, traceback, inspect...
-    
+
 
 2. Any unhandled exceptions will cause the offending AI to lose.
 
@@ -302,7 +304,7 @@ In addition to the main rules of the game, there are other conditions that may c
 
 ### Testing
 
-'battle.py' is the testing program - it will let you specify the agents that should play. 
+'battle.py' is the testing program - it will let you specify the agents that should play.
 
 
 ```
