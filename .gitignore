@@ -1,3 +1,4 @@
 *.pyc
 *.tar
 admiral
+.python-version
