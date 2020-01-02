@@ -28,7 +28,7 @@ The game is won when all of a player's ships have been sunk.
         cd BattlePyAI
 2. Create a new virtualenv for the game engine
 
-        virtualenv -p python2.7 battlepy
+        virtualenv -p python3 battlepy
         source battlepy/bin/activate
 3. Install the necessary requirements
 
@@ -61,7 +61,7 @@ You may choose to name your player class anything you like as long as you also p
 
 ### A complete Battlepy Agent
 
-But this code isnt enough to play - in fact it will fail since it does not implement the placeShips method properly, and has no implementations for the other methods.
+But this code isn't enough to play - in fact it will fail since it does not implement the placeShips method properly, and has no implementations for the other methods.
 
 Lets correct that while we look at some of the information available to your agent, and put down placeholders for all the available and required functions that a winning agent should implement..
 
