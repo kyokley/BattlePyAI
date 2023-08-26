@@ -1,10 +1,11 @@
+import random
+import math
 from battlePy.player import Player
 from battlePy.ship import (UP,
                            RIGHT,
                            SHIP_ORIENTATIONS,
                            VECTOR_DICT,
                            )
-import random, math
 
 (SEARCH,
  DESTROY,
@@ -67,7 +68,7 @@ class Admiral3(Player):
         else:
             self.defense = DEF_RANDOM
         self.pastMisses = {}
-        
+
     def newGame(self):
         self.shipSpecs = self.currentGame.shipSpecs
         self.gameCount += 1
@@ -76,20 +77,20 @@ class Admiral3(Player):
         self.shotsByColumn = {}
 
         if not self.pastMisses:
-            for i in xrange(self.boardWidth):
-                for j in xrange(self.boardHeight):
+            for i in range(self.boardWidth):
+                for j in range(self.boardHeight):
                     self.pastMisses[(i, j)] = 0
 
-        for i in xrange(self.boardHeight):
+        for i in range(self.boardHeight):
             self.shotsByRow[i] = [-1, self.boardWidth]
-        for i in xrange(self.boardWidth):
+        for i in range(self.boardWidth):
             self.shotsByColumn[i] = [-1, self.boardHeight]
 
         self.shipSizes = dict(((x[0], x[1]) for x in self.shipSpecs))
         self.remainingShips = dict(((x[0], x[1]) for x in self.shipSpecs))
 
         self.shots = set()
-        self.remainingShots = set([(x, y) for x in xrange(self.boardWidth) for y in xrange(self.boardHeight)])
+        self.remainingShots = set([(x, y) for x in range(self.boardWidth) for y in range(self.boardHeight)])
         self.foundShips = dict(((x[0], []) for x in self.shipSpecs))
         self.searchMat = []
         self.killMats = dict(((x[0], set()) for x in self.shipSpecs))
@@ -97,8 +98,8 @@ class Admiral3(Player):
         self.currentOffense = RANDOM
         self.defaultOffense = RANDOM
 
-        for i in xrange(self.boardHeight):
-            for j in xrange(i % 2, self.boardWidth, 2):
+        for i in range(self.boardHeight):
+            for j in range(i % 2, self.boardWidth, 2):
                 self.searchMat.append((i, j))
 
     def isPossibleShot(self, shot, minPoint, maxPoint, shipName):
@@ -117,7 +118,7 @@ class Admiral3(Player):
             possibleMin, possibleMax = findMinMaxPoint([minPoint, maxPoint, shot])
             maxCandidates = set()
             minCandidates = set()
-            for i in xrange(shipSize):
+            for i in range(shipSize):
                 maxCandidate = (possibleMin[0] + possibleShipLine[0] * i,
                              possibleMin[1] + possibleShipLine[1] * i)
                 maxCandidates.add(maxCandidate)
@@ -132,7 +133,7 @@ class Admiral3(Player):
                 return False
 
             for idx, val in enumerate(candidates):
-                for i in xrange(shipSize):
+                for i in range(shipSize):
                     if idx + i + 1 > len(candidates) - 1:
                         continue
 
@@ -153,7 +154,7 @@ class Admiral3(Player):
             shipLine = normalize((maxPoint[0] - minPoint[0],
                                        maxPoint[1] - minPoint[1]))
 
-            for i in xrange(0, self.shipSizes[shipName] + 1):
+            for i in range(0, self.shipSizes[shipName] + 1):
                 candidate = (minPoint[0] - i * shipLine[0],
                                 minPoint[1] - i * shipLine[1])
                 if self.isPossibleShot(candidate, minPoint, maxPoint, shipName):
@@ -202,7 +203,7 @@ class Admiral3(Player):
         self.remainingShips.pop(shipName)
         self.killMats[shipName] = set()
 
-        for killMat in self.killMats.itervalues():
+        for killMat in self.killMats.values():
             if killMat:
                 self.currentOffense = DESTROY
                 break
@@ -259,7 +260,7 @@ class Admiral3(Player):
                 if self.currentOffense == RANDOM:
                     shot = self.getRandomShot()
                 elif self.currentOffense == DESTROY:
-                    for killMat in self.killMats.itervalues():
+                    for killMat in self.killMats.values():
                         if killMat:
                             shot = random.choice(list(killMat))
                             killMat.remove(shot)
@@ -378,7 +379,7 @@ class Admiral3(Player):
         refLocation = position[0]
         orientation = position[1]
         locations.add(refLocation)
-        for i in xrange(ship.size - 1):
+        for i in range(ship.size - 1):
             newLocation = (refLocation[0] + VECTOR_DICT[orientation][0],
                     refLocation[1] + VECTOR_DICT[orientation][1])
             locations.add(newLocation)
@@ -406,12 +407,12 @@ class Admiral3(Player):
                 else:
                     isValid = True
                     allLocations = allLocations.union(locations)
-                    placement[ship] = (refLocation, orientation) 
+                    placement[ship] = (refLocation, orientation)
 
         return placement
 
     def buildPlacements(self):
-        placements = [self.generatePlacement() for i in xrange(100)]
+        placements = [self.generatePlacement() for i in range(100)]
         scores = {}
         for placement in placements:
             score = self.scoreShipPlacement(placement)
