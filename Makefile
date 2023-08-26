@@ -9,3 +9,6 @@ build:
 
 run:
 	docker run --rm -t -v $(pwd):/code/BattlePyAI kyokley/battleship --vis
+
+tournament:
+	docker run --rm -t -v $$(pwd):/code/BattlePyAI --entrypoint "python" kyokley/battleship tournament.py
